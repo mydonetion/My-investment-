@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Invest Bangladesh</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      color: #333;
+    }
+    header {
+      background-color: #0277bd;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 26px;
+    }
+    .nav-bar {
+      display: flex;
+      justify-content: space-around;
+      background-color: #01579b;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      padding: 10px 0;
+    }
+    .nav-bar a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    .content {
+      padding: 20px;
+      padding-bottom: 80px;
+    }
+    .card {
+      background: white;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #0277bd;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .contact-form button {
+      background-color: #0277bd;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    Smart Invest Bangladesh
+  </header>
+
+  <div class="content">
+    <div class="card">
+      <h2>Welcome to Smart Invest</h2>
+      <p>We offer secure, high-return investment plans tailored for Bangladesh. Start small, grow big!</p>
+    </div>
+
+    <div class="card">
+      <h2>Investment Plans</h2>
+      <ul>
+        <li>📈 Fixed Deposit – 12% annual return</li>
+        <li>💸 Monthly Saver – Start from ৳1,000</li>
+        <li>🏠 Real Estate – Invest in housing projects</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>How It Works</h2>
+      <p>1. Choose a plan → 2. Submit info → 3. Invest safely → 4. Get returns monthly/yearly.</p>
+    </div>
+
+    <div class="card">
+      <h2>Contact Us</h2>
+      <form class="contact-form" name="submit-to-google-sheet">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" rows="4" placeholder="Your Message"></textarea>
+        <button type="submit">Send Message</button>
+        <span id="msg" style="color: green; display: block; margin-top: 10px;"></span>
+      </form>
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <a href="#">Home</a>
+    <a href="#">Plans</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzXXXXXXX/exec'; // Replace with your Google Apps Script URL
+    const form = document.forms['submit-to-google-sheet'];
+    const msg = document.getElementById('msg');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+          msg.innerHTML = "Message sent successfully!";
+          form.reset();
+        })
+        .catch(error => console.error('Error!', error.message));
+    });
+  </script>
+
+</body>
+</html>
